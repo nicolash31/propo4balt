@@ -62,12 +62,12 @@ while($data = mysql_fetch_assoc($resultat))
 	<input type="hidden" name="id" value="'.$data['id'].'">
 	<td>';
 	if ($_SESSION['statut'] == 2) //on autorise admin a changer le nom
-		{ $page.= '<input type="text" size="30" name="pseudo" value="'.$data['pseudo'].'">'; }
+		{ $page.= '<input type="text" size="15" name="pseudo" value="'.$data['pseudo'].'">'; }
 	else
 		{ $page.= $data['pseudo'].'
 		<input type="hidden" name="pseudo" value="'.$data['pseudo'].'">'; }
 	$page.= '</td>
-	<td><input type="text" size="50" name="mail_addr" value="'.$data['mail_addr'].'"></td>
+	<td><input type="text" size="25" name="mail_addr" value="'.$data['mail_addr'].'"></td>
 	<td>';
 ////------------parte portant sur le statut------------------------------------------	
 	if ($_SESSION['statut'] == 2) //on autorise admin a changer le statut des autres
@@ -90,7 +90,7 @@ while($data = mysql_fetch_assoc($resultat))
 		else                        { $page.= 'invite';}
 		}
 	$page.= '</td>
-	<td><input type="password" size="30" name="mot2passe" value=""></td>
+	<td><input type="password" size="15" name="mot2passe" value=""></td>
 	<td><input type="submit" value="MODIFIER"></td></tr>
 	</form>';
     }
