@@ -1,0 +1,11 @@
+!! Desinscription 2016-11-23 C1 le 2016-11-22 a 11:10:58 pour Nicolas
+++ Inscription    2016-11-23 C1 le 2016-11-22 a 11:11:00 pour Nicolas
+++ Ajout invite   2016-11-23 C1 le 2016-11-22 a 11:11:05 pour Chloé par Nicolas
+++ Ajout invite   2016-11-23 C2 le 2016-11-22 a 12:29:59 pour  par Nicolas
+!! supprime invit 2016-11-23 C2 le 2016-11-22 a 12:34:52 pour  par Nicolas
+++ Inscription    2016-11-24 C2 le 2016-11-22 a 12:34:57 pour Nicolas
+++ Inscription    2016-11-28 C1 le 2016-11-22 a 12:35:05 pour Nicolas
+-- supprime invit 2016-11-28 C1 le 2016-11-22 a 12:35:07 pour d par Nicolas
+++ Inscription    2016-11-23 C2 le 2016-11-22 a 01:32:09 pour Chlooé
+++ Inscription    2016-11-24 C2 le 2016-11-22 a 05:46:50 pour Edouard
+++ Inscription    2016-11-24 C1 le 2016-11-22 a 05:46:59 pour Edouard

@@ -1,0 +1,155 @@
+body {
+	margin: 0;
+	padding:0;
+	width: 100%;
+	height: 100%;
+	font-family: verdana, arial, sans-serif;
+	color: #333;
+}
+a {     
+	text-decoration: none;     
+	color: #555;
+}
+#menu {
+	position: fixed; 
+	right: 0;
+	top: 10%;
+	width: 150;
+	margin: 0 0 0 0;
+	z-index: 5;
+    background: hsla(80, 90%, 40%, 0.7);
+	color: white;
+	font-weight: bold;
+    font-size: small;
+	text-align: left;
+	border: solid hsla(80, 90%, 40%, 0.5);
+    border-right: none;
+	padding: 0.5em 0.5em 0.5em 2.5em;
+	box-shadow: 0 1px 3px black;
+    border-radius: 3em 0.5em 0.5em 3em;
+  }
+#menu li { margin: 0 }
+#menu a { color: inherit }
+  /* Make menu absolute, not fixed, on IE 5 & 6 */
+#menu { position: absolute }
+*>#menu { position: fixed }
+#warning{
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #666;
+  background: #FF5555;
+}
+
+#noteok{
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #666;
+  background: #55ff55;
+}
+tr  {    padding: 0px 0px;}
+
+td {
+  font-size : 12px;
+  font-family : Verdana, arial, helvetica, sans-serif;
+  border-radius: 5px;
+  border: 4px solid #CCCCCC;
+  background-color : #FFFFFF;
+  padding: 0px 0px;
+}
+
+.table-resa {
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    border: 2px #CCCCCC;
+    border-collapse: separate;
+    border-spacing: 0px 0px;
+    padding: 0px 0px;
+}
+
+/* sans bord et à gauche */
+.noborder_left {
+  text-align : left;
+  border: 0px;
+}
+/* sans bord et à droite */
+.noborder_right {
+  text-align : right;
+  border: 0px;
+}
+
+/* Style des en-têtes du tableau (possible et ouvert a resa) */
+.table-titre {
+  font-size : 12px;
+  font-family : Verdana, arial, helvetica, sans-serif;
+  border-radius: 10px;
+  border: 2px solid #BBBBBB;
+  text-align : right;
+  background-color : #DDDDDD;
+}
+
+/* Style des en-têtes du tableau (possible et ouvert a resa) */
+.table-titre-center {
+  font-size : 12px;
+  font-family : Verdana, arial, helvetica, sans-serif;
+  border-radius: 10px;
+  border: 2px solid #BBBBBB;
+  text-align : center;
+  background-color : #DDDDDD;
+}
+
+/* Style des en-têtes du tableau (possible et ouvert a resa) */
+.table-ouvert {
+  font-size : 12px;
+  font-family : Verdana, arial, helvetica, sans-serif;
+  border-radius: 10px;
+  border: 4px solid #99C343;
+  text-align : center;
+  background-color : #A9D353;
+}
+
+/* Style des en-têtes du tableau (possible et ouvert a resa) */
+.table-plein {
+  font-size : 12px;
+  font-family : Verdana, arial, helvetica, sans-serif;
+  border-radius: 10px;
+  border: 4px solid #DD1111;
+  text-align : center;
+  background-color : #FF3333;
+}
+
+/* Style des en-têtes du tableau (possible et ouvert a resa) */
+.table-troploin {
+  font-size : 12px;
+   font-family : Verdana, arial, helvetica, sans-serif;
+  border-radius: 10px;
+  border: 4px solid #DD9966;
+  text-align : center;
+  background-color : #FFBB88;
+}
+/* Style des en-têtes du tableau (possible et ouvert a resa) */
+.table-ferme {
+  font-size : 12px;
+   font-family : Verdana, arial, helvetica, sans-serif;
+  border-radius: 10px;
+  border: 4px solid #666666;
+  text-align : center;
+  background-color : #888888;
+}
+/* pour les lignes ok lors du chargement d'un fichier*/
+.table-listok {
+  font-size : 12px;
+  font-family : Verdana, arial, helvetica, sans-serif;
+  border-radius: 10px;
+  border: 4px solid #66DD66;
+  text-align : left;
+  background-color : #88FF88;
+}
+/* pour les lignes ko lors du chargement d'un fichier*/
+.table-listko {
+  font-size : 12px;
+  font-family : Verdana, arial, helvetica, sans-serif;
+  border-radius: 10px;
+  border: 4px solid #DD1111;
+  text-align : left;
+  background-color : #FF3333;
+}
