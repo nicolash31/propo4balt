@@ -1,0 +1,10 @@
+nb_j_admin = 15 * période durant laquelle un admin peut réserver
+nb_j_membre = 7 * période durant laquelle un membre peut réserver
+nb_j_invite = 2 * période durant laquelle un invité peut réserver
+nb_c_admin = 9 * nombre de créneaux reservables par un admin
+nb_c_membre = 5 * nombre de créneaux reservables par un membre
+nb_c_invite = 3 * nombre de créneaux reservables par un invité
+nb_places = 16 * nombre de places par créneau
+jour2visu = 14 * nombre de jour visible sur la page de réservation
+visit_sem = 6 * nombre de nouveaux invités maximum par semaine
+jour2warm = 4 * nombre de jours pour signaler une desinscription tardive
