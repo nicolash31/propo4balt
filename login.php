@@ -6,7 +6,7 @@ while($data = mysql_fetch_assoc($resultat))
 	$list_j[$n]=$data['pseudo'];
 	$n++;
 	}
-			
+sort($list_j);			
 $page.='<form action="index.php" method="post">
 <table align="center">
 <tr><td colspan="2" align="center">Identifiez vous :</td></tr>
