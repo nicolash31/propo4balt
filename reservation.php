@@ -174,7 +174,6 @@ elseif (isset ($_GET["desinvit"]))
 		else
 			{ $warning="-- "; }
 		report($warning."supprime invit ".$ligne['date']." C".$ligne['creneau'],$old_nom_invit." par ".$noms_j[$ligne['id_j']]); 
-		
 		}
 	}
 
@@ -251,18 +250,18 @@ while($data = mysql_fetch_assoc($resultat))
 	}
 $page.="\nVous avez	".$nb_resa." reservation(s) / ".$nb2res."(MAX)</br></br>\n";
 
+// Affichage de la légende
 $page.='<table class="table-resa"><tr>
 <td> Légende : </td>
 <td class="table-ouvert" width="150px">ouvert à la reservation</td>
 <td class="table-troploin" width="150px">pas encore ouvert</td>
 <td class="table-plein" width="150px">complet</td>
 <td class="table-ferme" width="150px">fermé</td></tr></table></br></br>';
-	
+
+// Affichage de la table des reservations
 $page.="\n".'<table class="table-resa"><tr><td class="table-titre">Jour</td>';
 for ($j=0;$j<$nb_jour;$j++)
-	{
-	$page.="<td colspan=2 align=\"center\">".date2str($jour2jeu[$j],2)."</td>";		
-	}
+	{ $page.="<td colspan=2 align=\"center\">".date2str($jour2jeu[$j],2)."</td>"; }
 $page.="\n".'</tr><tr><td class="table-titre">Créneau</td>';	
 for ($j=0;$j<$nb_jour;$j++)
 	{ $page.='<td'.$coul[$j."_1"].'>19H->20H30</td><td'.$coul[$j."_2"].'>20H30->22H</td>'; }
@@ -273,8 +272,8 @@ for ($j=0;$j<$nb_jour;$j++)
 	$page.='<td align="center">'.$nb_part[$j."_1"]." / ".$param["nb_places"].'</td>
 	<td align="center">'.$nb_part[$j."_2"].' / '.$param["nb_places"]."</td>";
 	}
-
-if ($_SESSION["statut"]==2) // pour les admin on affiche le nombre d'invité
+// pour les admin on affiche aussi une ligne avec le nombre d'invités
+if ($_SESSION["statut"]==2) 
 	{
 	$page.="\n".'</tr><tr><td class="table-titre">Nombre</br>d\'invités</td>';	
 	for ($j=0;$j<$nb_jour;$j++)
@@ -283,7 +282,7 @@ if ($_SESSION["statut"]==2) // pour les admin on affiche le nombre d'invité
 			{		$page.='<td align="center">'.$nb_invit[$j."_".$c].'</td>';		}
 		}
 	}
-
+// partie inscription/desinscription du tableau
 $page.="\n".'</tr><tr><td class="table-titre">Inscription</td>';	
 for ($j=0;$j<$nb_jour;$j++)
 	{
@@ -300,18 +299,21 @@ for ($j=0;$j<$nb_jour;$j++)
 				{
 				$page.='<form action="index.php" method="post">
 				<input type="hidden" name="ajoutinvit" value="'.$inscrit[$j."_".$c].'">
-				<input type="text" placeholder="nom de l\'invité" name="nom_invit" size="20"></br>
+				<input type="text" placeholder="nom de l\'invité" name="nom_invit" size="15"></br>
 				<input type="submit" value="Ajout Invité" ></form>';		
 				}
 			$page.='</td>';		
 			}
+		// si on est pas inscrit si il reste de la place et si on est pas simple visiteur
 		elseif (($reservable[$j."_".$c]==1) and ($nb_resa<$nb2res) and ($nb_part[$j."_".$c]<$param["nb_places"]) and ($visiteur==0))
 			{
 			$page.='<td class="table-ouvert"><form action="index.php" method="post">';	
-			if (($nb_part[$j."_".$c]<($param["nb_places"]-1)) and ($_SESSION["statut"]>=1))//il faut 2 places pour inviter
+			// si on est pas soit meme un invité et si il reste de la place (il faut 2 places pour joueur et invité)
+			// alors on autorise aussi un invité
+			if (($nb_part[$j."_".$c]<($param["nb_places"]-1)) and ($_SESSION["statut"]>=1))
 				{ // et un invité ne peut pas inviter
 				$page.='avec invité <INPUT type="checkbox" name="invit" value="1"></br>
-				<input type="text" placeholder="nom de l\'invité" name="nom_invit" size="20"></br>';	
+				<input type="text" placeholder="nom de l\'invité" name="nom_invit" size="15"></br>';	
 				}
 			else
 				{ $page.='<input type="hidden" name="invit" value="0">
@@ -319,8 +321,7 @@ for ($j=0;$j<$nb_jour;$j++)
 			$page.='<input type="hidden" name="date" value="'.$jour2jeu[$j].'">
 			<input type="hidden" name="creneau" value="'.$c.'">
 			<input type="submit" value="Inscription">
-			</form></td>';		
-			
+			</form></td>';				
 			}
 		elseif (($reservable[$j."_".$c]==1) and ($nb_resa<$nb2res) and ($nb_part[$j."_".$c]=$param["nb_places"]) and ($visiteur==0))
 			{$page.='<td class="table-plein">Complet</td>';}
@@ -328,11 +329,12 @@ for ($j=0;$j<$nb_jour;$j++)
 			{$page.='<td class="table-ferme"></td>';}
 		}
 	}
+//ligne des participants dans le tableau
 $page.="\n".'</tr><tr valign="top" ><td class="table-titre">Joueurs</td>';	
 for ($j=0;$j<$nb_jour;$j++)
 	{
 	for ($c=1;$c<=2;$c++)
-		{		$page.='<td>'.$participants[$j."_".$c].'</br></td>';		}
+		{ $page.='<td>'.$participants[$j."_".$c].'</br></td>'; }
 	}
 $page.="\n</tr></table>";	
 ?>

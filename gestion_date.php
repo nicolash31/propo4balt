@@ -1,13 +1,10 @@
 
 <?php 
 
-$page.='<h1>Gestion des créneaux reservables</h1></br>
-';
+$page.='<h1>Gestion des créneaux reservables</h1></br>';
 
 if ($_SESSION["statut"]!=2)
-	{
-	$page.='<br/><div id="warning">Oups vous ne devriez pas avoir acces à cette page :( </div><br/><br/>'."\n";
-	}	
+	{ $page.='<br/><div id="warning">Oups vous ne devriez pas avoir acces à cette page :( </div><br/><br/>'."\n"; }	
 else
 {
 $page.='<font color="green">en vert les créneaux reservables</font></br>
@@ -38,36 +35,33 @@ $temps_m1m =mktime( 0, 0, 0, ($mois-1), 1, $annee ); // jour 1 du mois precedent
 $date_m1m  =date("Y-m-d",$temps_m1m);
 
 for ($j=1;$j<=31;$j++)
-	{ 	$C1sel[$j]=0; $C2sel[$j]=0;	$C1existe[$j]=0; $C2existe[$j]=0; 	}
+	{ 	$C1sel[$j]=0; $C2sel[$j]=0;	$existe[$j]=0;	} //par defaut pas de reservation et le jour n est pas enregistre
 //recherche des dates deja utilisees
 $resultat=mysql_query("SELECT * FROM `date2bad` WHERE `date` >= '".$date_1m."' and `date` < '".$date_p1m."'");
 while($data = mysql_fetch_assoc($resultat))
     {
 	$j_tmp=intval(substr($data['date'],8,2));
-	$C1sel[$j_tmp]=$data['C1'];  $C1existe[$j_tmp]=$data['id_date'];
-	$C2sel[$j_tmp]=$data['C2'];  $C2existe[$j_tmp]=$data['id_date'];
+	$existe[$j_tmp]=$data['id_date'];
+	$C1sel[$j_tmp]=$data['C1'];  
+	$C2sel[$j_tmp]=$data['C2'];  
     }
 	
 // recherche si une date a été cochée	
 for ($j=1;$j<=31;$j++)
 { 
 $jour=sprintf("%04.0f-%02.0f-%02.0f",$annee,$mois,$j);
-if ($_GET["C1"]==1 and $num_jour==$j)
+
+if ((($_GET["C1"]==1) or ($_GET["C2"]==1)) and $num_jour==$j) // pour cochage C1 ou  C2
 	{
-	$C1sel[$j]=1-$C1sel[$j];
-	if ($C1existe[$j]==0)
-		{ $requete="INSERT INTO `date2bad` (`date`, `C1`, `C2`) VALUES ('".$jour."', '1', '0')"; }
-	else
-		{ $requete="UPDATE `date2bad` SET `C1` = '".$C1sel[$j]."' WHERE `id_date` =".$C1existe[$j]; }
-	mysql_query($requete);
-	}
-if ($_GET["C2"]==1 and $num_jour==$j)
-	{
-	$C2sel[$j]=1-$C2sel[$j];
-	if ($C2existe[$j]==0)
-		{ $requete="INSERT INTO `date2bad` (`date`, `C1`, `C2`) VALUES ('".$jour."', '0', '1')"; }
-	else
-		{ $requete="UPDATE `date2bad` SET `C2` = '".$C2sel[$j]."' WHERE `id_date` =".$C2existe[$j]; }
+	if ($_GET["C1"]==1) //si la case C1 est validee
+		{ $C1sel[$j]=1-$C1sel[$j]; }
+	if ($_GET["C2"]==1) //si la case C2 est validee
+		{ $C2sel[$j]=1-$C2sel[$j]; }		
+	if ($existe[$j]==0) // une nouvelle date
+		{ $requete="INSERT INTO `date2bad` (`date`, `C1`, `C2`) VALUES ('".$jour."', '".$C1sel[$j]."', '".$C2sel[$j]."')"; }
+	else // mise a jour de la date
+		{ $requete="UPDATE `date2bad` SET `C1` = '".$C1sel[$j]."', `C2` = '".$C2sel[$j]."' WHERE `id_date` =".$existe[$j]; }
+	$page.="requete 1 : ".$requete."</br>";
 	mysql_query($requete);
 	}
 }
@@ -101,9 +95,9 @@ $page.= '<tr>
 				if ($C2sel[$num_jour]==1) {$colC2="green";} else {$colC2="red";}
 				$page.= '<td align="center">';
 				if (($num_jour==$cur_jour) and ($mois==$cur_mois) and ($annee==$cur_annee))
-					{ $page.= '<b>'.$num_jour.'</b>'; }
+					{ $page.= '<b><a href=index.php?page=date&jour='.$jour.'&C1=1&C2=1>'.$num_jour.'</a></b>'; }
 				else
-					{ $page.= $num_jour; }
+					{ $page.= '<a href=index.php?page=date&jour='.$jour.'&C1=1&C2=1>'.$num_jour.'</a>'; }
 				$page.= '</br>
 				<a href=index.php?page=date&jour='.$jour.'&C1=1><font color="'.$colC1.'">19H00->20H30</font></a>
 				</br>

@@ -119,53 +119,8 @@ while ($ligne = fgets($monfichier))
 fclose($monfichier); 
 $cur_sem=date("W");
 if ($cur_sem != $sem)
-{
-	$archivage_ok=1;
-	//---------------------------------------
-	$fichier_in="suivi.txt";
-	$fichier_out="archives/suivi_sem_".$sem."_a_".$cur_sem.".txt";
-	if (($idfile_in = fopen($fichier_in, "r")) and ($idfile_out= fopen($fichier_out, "w")))
-	{
-		while ($ligne = fgets($idfile_in))
-		{ fwrite($idfile_out,$ligne); }
-		fclose($idfile_in);
-		fclose($idfile_out);
-	}
-	else
-	{ $archivage_ok=0; }
-	//---------------------------------------
-	$fichier_in="visiteurs.txt";
-	$fichier_out="archives/visiteurs_sem_".$sem."_a_".$cur_sem.".txt";
-	if (($idfile_in = fopen($fichier_in, "r")) and ($idfile_out= fopen($fichier_out, "w")))
-	{
-		while ($ligne = fgets($idfile_in))
-		{ fwrite($idfile_out,$ligne); }
-		fclose($idfile_in);
-		fclose($idfile_out);
-	}
-	else
-	{ $archivage_ok=0; }
-
-	if ($monfichier = fopen("nouveau.txt", "w"))
-	{ 
-		fwrite($monfichier,"Semaine = ".$cur_sem.CHR(10));
-		fwrite($monfichier,"Nombre = ".$nb_new.CHR(10));
-		fclose($monfichier);
-	}
-	else
-	{ $archivage_ok=0; }
-	if ($archivage_ok==1) //si tout c est bien passe on remet a 0 les anciens
-	{
-		$fichier_out="suivi.txt";
-		if ($idfile_out= fopen($fichier_out, "w"))
-		{fclose($idfile_out);}
-		$fichier_out="visiteurs.txt";
-		if ($idfile_out= fopen($fichier_out, "w"))
-		{fclose($idfile_out);}	
-	}	
-}	
-
-// FIN de la partie archivage
+	{ include('creation_archives.php'); }
+// FIN de la partie archivage	
 include('feuilles.php');
 include($lapage);
 mysql_close($base_id);	

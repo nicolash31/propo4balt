@@ -1,12 +1,9 @@
 <?php  
 $page.="<h1><i>Paramètres</i></h1>\n";
 if ($_SESSION["statut"]!=2)
-	{
-	$page.='<br/><div id="warning">Oups vous ne devriez pas avoir acces à cette page :( </div><br/><br/>'."\n";
-	}	
+	{ $page.='<br/><div id="warning">Oups vous ne devriez pas avoir acces à cette page :( </div><br/><br/>'."\n";	}	
 else
 {
-
 if ($_POST["param_num"]>0)
 	{
 	if ($monfichier = fopen("parametres.txt", "w"))
@@ -38,7 +35,7 @@ while ($ligne = fgets($monfichier))
 		$param_com=$matches[3];
 		$nb_param++;
 		$page.='
-		<tr><td class="table-titre">'.$param_name.'</td><td><input type="number" name="'.$param_name.'" value='.$param_val.' min="0" max="100"></td>
+		<tr><td class="table-titre">'.$param_name.'</td><td><input type="number" name="'.$param_name.'" value='.$param_val.' min="0"></td>
 		<td><input type="hidden" name="'.$param_name.'_com" value="'.$param_com.'">
 		'.$param_com.'</td></tr>';
 		}
